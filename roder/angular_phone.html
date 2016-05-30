@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="phoneApp">
+
+<head>
+    <title>Angular-Frontend</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script type="text/javascript" src = "http://karanverma.me/js/app.js"></script>
+</head>
+
+<body ng-controller="phoneAppController as phoneApp">
+    <div >
+        {{phoneApp.pdata.name}}
+        {{phoneApp.test}}
+        <div class="list-group-item" ng-repeat="mobile in phoneApp.pdata">
+            <h3>{{phoneApp.mobile.name}}<em class="pull-right">{{phoneApp.mobile.ram}}</em></h3>
+        </div>
+    </div>
+    <div ng-controller= "testController as tc">
+    	{{tc.google}} + loves + {{tc.wiki}}
+    </div>
+</body>
+
+</html>

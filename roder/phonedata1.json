@@ -1,0 +1,27 @@
+
+{
+	"mobile":[    
+		{  "name":"lg g2",
+			"Ram":"1GB",
+			"camera":"8mp",
+			"battery":"1300mAh",
+			"storage":"6gb",
+			"rank":2
+		},
+		{
+			"name": "sony",
+			"Ram":"1GB",
+			"camera":"8mp",
+			"battery":"1000mAh",
+			"storage":"8gb"
+		},
+		{
+			"name": "lg g3",
+			"Ram":"1GB",
+			"camera":"8mp",
+			"battery":"4000mAh",
+			"storage":"12gb"
+		}	
+	]
+}			
+	
