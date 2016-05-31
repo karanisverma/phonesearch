@@ -23,11 +23,12 @@
 #         with open(filename, 'wb') as f:
 #             f.write(response.body)
 # -*- coding: utf-8 -*-
-
+from __future__ import print_function
 import bleach
 import re
 import scrapy
 import time
+import json
 # from skoov_parser.parsers import parse_biba
 from pprint import pprint
 from content_parser import content_parser
@@ -51,6 +52,8 @@ class gsm_spyder(CrawlSpider):
                                  'http://www.gsmarena.com/.*nickname.*',
                                  'http://www.gsmarena.com/.*facebook.*',
                                  'http://www.gsmarena.com/.*google.*',
+                                 'http://www.gsmarena.com/.*whyregister.*',
+                                 ' http://www.gsmarena.com/.*postopinion.*',
                                  'http://www.gsmarena.com/.*review.*')),
              callback='parse_custom', follow=True),)
 
@@ -73,6 +76,7 @@ class gsm_spyder(CrawlSpider):
         self.deny = ""
         self.crawl_limt = 0
         self.real_count = 0
+        self.batch_size = 300
         self.mobile_product = []
 
     def parse_custom(self, response):
@@ -88,6 +92,15 @@ class gsm_spyder(CrawlSpider):
         mobile_json = content_parser(content,response.url)
         if mobile_json:
             self.count = self.count+1
+            # print mobile_json
+            self.mobile_product.extend(mobile_json)
+            # print self.mobile_product
+            if self.count % self.batch_size == 0 and self.mobile_product:
+                f = open('mobiledata.json', 'w')
+                f.write(json.dumps(self.mobile_product))
+                f.close()
+                # print "Written => ",self.mobile_product
+                print ("Product written to file => ",self.count, end='\r')
             # self.mobile_product.append(mobile_json)
         # print "######## URL IS==> ",product_url
         # Parse the content
@@ -101,7 +114,8 @@ class gsm_spyder(CrawlSpider):
         # TBD - Ingest the JSON or write it to DB
         # print response.url
         # self.count += 1
-        print "Table Found => ", self.count
+
+        print ("Product Found => ", self.count, end='\r')
         # print "Totoal product =>",len(self.mobile_product)
         # if self.real_count > self.crawl_limt:
         #     raise CloseSpider('crawl limit ==>>done')
