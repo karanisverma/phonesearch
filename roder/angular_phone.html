@@ -4,14 +4,17 @@
 <head>
     <title>Angular-Frontend</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+    <link href="https://karanverma.me/js/custom.css" rel="stylesheet">
 </head>
 
 <body>
-    <div ng-controller="phoneAppController as phoneApp">
-        <!-- {{phoneApp.mobile}} -->
+    <div ng-controller="phoneAppController as phoneApp" class= "container">
+
+        <!-- Sliders -->
         <div layout>
             <div flex="10" layout layout-align="center center">
                 <span class="md-body-1">Ram</span>
@@ -19,6 +22,7 @@
             <md-slider flex md-discrete ng-model="rating1" step="1" min="1" max="10" aria-label="rating">
             </md-slider>
         </div>
+        
         <div layout>
             <div flex="10" layout layout-align="center center">
                 <span class="md-body-1">Camera</span>
@@ -26,8 +30,8 @@
             <md-slider flex md-discrete ng-model="rating2" step="1" min="1" max="10" aria-label="rating">
             </md-slider>
         
-        <!-- inside the div => <span ng-bind="rating2+rating1"></span> -->
         </div>
+        
         <div layout>
             <div flex="10" layout layout-align="center center">
                 <span class="md-body-1">Storage</span>
@@ -35,6 +39,7 @@
             <md-slider flex md-discrete ng-model="rating3" step="1" min="1" max="10" aria-label="rating">
             </md-slider>
         </div>
+        
         <div layout>
             <div flex="10" layout layout-align="center center">
                 <span class="md-body-1">Battery</span>
@@ -43,10 +48,9 @@
             </md-slider>
             inside the div => <span ng-if= "(rating2+rating1+rating3+rating4) < 28" >wow!!!!</span>
         </div>        
+
+        <!-- Mobile device -->
         <div class="list-group-item" ng-repeat="mobil in phoneApp.mobile">
-            <!--  <img src={{mobil.img}}>
-            <h3><a href = {{mobil.url}}>Name: {{mobil.name}}</a><em class="pull-right">Ram: {{mobil.ram}}, Storage: {{mobil.storage}}</em></h3>
-         -->
             <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
                 <md-card-title>
                     <md-card-title-text>

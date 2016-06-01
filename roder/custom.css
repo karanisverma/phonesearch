@@ -1,0 +1,8 @@
+.container{
+    position: absolute;
+    float: none;
+    margin: 0 30%;
+}
+md-card>:not(md-card-content) img, md-card>img{
+	width: initial;
+}
