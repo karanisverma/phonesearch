@@ -8,7 +8,8 @@
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
-    <link href="https://karanverma.me/js/custom.css" rel="stylesheet">
+    <link href="custom.css" rel="stylesheet">
+    <!-- <link href="https://karanverma.me/js/custom.css" rel="stylesheet"> -->
 </head>
 
 <body>
@@ -48,7 +49,8 @@
             </md-slider>
             inside the div => <span ng-if= "(rating2+rating1+rating3+rating4) < 28" >wow!!!!</span>
         </div>        
-
+        <md-button class="md-raised" ng-click = "phoneApp.search(rating2,rating1,rating3,rating4)">Find Me Device</md-button>
+         <!-- <md-button class="md-raised" ng-click = phoneApp.search(rating2,rating1,rating3,rating4)>Find Me Device</md-button> -->
         <!-- Mobile device -->
         <div class="list-group-item" ng-repeat="mobil in phoneApp.mobile">
             <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
@@ -79,6 +81,6 @@
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
 <!-- Angular Material Library -->
 <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
-<script type="text/javascript" src="http://karanverma.me/js/app.js"></script>
+<script type="text/javascript" src="app.js"></script>
 
 </html>
