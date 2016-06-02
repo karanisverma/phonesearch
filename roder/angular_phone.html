@@ -20,7 +20,7 @@
             <div flex="10" layout layout-align="center center">
                 <span class="md-body-1">Ram</span>
             </div>
-            <md-slider flex md-discrete ng-model="rating1" step="1" min="1" max="10" aria-label="rating">
+            <md-slider flex md-discrete ng-model="phoneApp.rating1" step="1" min="1" max="10" aria-label="rating">
             </md-slider>
         </div>
         
@@ -28,7 +28,7 @@
             <div flex="10" layout layout-align="center center">
                 <span class="md-body-1">Camera</span>
             </div>
-            <md-slider flex md-discrete ng-model="rating2" step="1" min="1" max="10" aria-label="rating">
+            <md-slider flex md-discrete ng-model="phoneApp.rating2" step="1" min="1" max="10" aria-label="rating">
             </md-slider>
         
         </div>
@@ -37,7 +37,7 @@
             <div flex="10" layout layout-align="center center">
                 <span class="md-body-1">Storage</span>
             </div>
-            <md-slider flex md-discrete ng-model="rating3" step="1" min="1" max="10" aria-label="rating">
+            <md-slider flex md-discrete ng-model="phoneApp.rating3" step="1" min="1" max="10" aria-label="rating">
             </md-slider>
         </div>
         
@@ -45,11 +45,12 @@
             <div flex="10" layout layout-align="center center">
                 <span class="md-body-1">Battery</span>
             </div>
-            <md-slider flex md-discrete ng-model="rating4" step="1" min="1" max="10" aria-label="rating">
+            <md-slider flex md-discrete ng-model="phoneApp.rating4" step="1" min="1" max="10" aria-label="rating">
             </md-slider>
-            inside the div => <span ng-if= "(rating2+rating1+rating3+rating4) < 28" >wow!!!!</span>
-        </div>        
-        <md-button class="md-raised" ng-click = "phoneApp.search(rating2,rating1,rating3,rating4)">Find Me Device</md-button>
+            inside the div => <span ng-if= "(phoneApp.rating2+phoneApp.rating1+phoneApp.rating3+phoneApp.rating4) < 28" >wow!!!!</span>
+        </div>   
+        <button ng-click ="phoneApp.dummy()">dummy button</button>     
+        <md-button class="md-raised" ng-click = "phoneApp.search(phoneApp.rating2,phoneApp.rating1,phoneApp.rating3,phoneApp.rating4)">Find Me Device</md-button>
          <!-- <md-button class="md-raised" ng-click = phoneApp.search(rating2,rating1,rating3,rating4)>Find Me Device</md-button> -->
         <!-- Mobile device -->
         <div class="list-group-item" ng-repeat="mobil in phoneApp.mobile">
