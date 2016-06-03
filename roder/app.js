@@ -6,13 +6,27 @@ app.controller('phoneAppController', ['$http', function($http) {
         phoneApp.mobile = data;  
         // console.log("PHONE DATA =>>>> ",phoneApp.mobile);
     });
-    this.ranker = function(rating1,rating2,rating3,rating4){
+    this.ranker = function(ram_rating,camera_rating,storage_rating,battery_rating){
         // console.log("worked!!");
         // console.log("Printing it from"+phoneApp.mobile);
-        console.log(rating2+", "+rating1+", "+rating3+", "+rating4);
+        console.log(ram_rating+", "+camera_rating+", "+storage_rating+", "+battery_rating);
+       
         for (i = 0; i < phoneApp.mobile.length; i++) { 
-            console.log(phoneApp.mobile[i].name);
-}
+            // console.log(phoneApp.mobile[i].name);
+            var ram_r = parseInt(ram_rating);
+            var camera_r = parseInt(camera_rating);
+            var battery_r = parseInt(battery_rating);
+            var storage_r = parseInt(storage_rating);
+
+            var ram = parseInt(phoneApp.mobile[i].ram);
+            var camera = parseInt(phoneApp.mobile[i].camera);
+            var battery = parseInt(phoneApp.mobile[i].battery);
+            var storage = parseInt(phoneApp.mobile[i].storage);
+
+            var rank = (ram_r*(ram/2))+(camera_r*(camera/8))+(storage_r*(storage/8))+(battery_r*(battery/2100));
+            phoneApp.mobile[i].rank = rank;
+            console.log(rank)
+        } 
         // TODO :
         // apply for-loop for each product in data 
         // and get the ranking out of it 
