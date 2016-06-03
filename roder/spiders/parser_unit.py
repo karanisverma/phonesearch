@@ -1,3 +1,6 @@
+'''
+Test module to make sure that spider output is getting parsed correctly
+'''
 import re
 k =['Technology', '2G bands', '3G Network', '4G Network', 'Speed', 'GPRS', 'EDGE', 'Announced', 'Status', 'Dimensions', 'Weight', 'SIM', 'Type', 'Size', 'Resolution', 'Multitouch', 'Protection', 'OS', 'Chipset', 'CPU', 'GPU', 'Card slot', 'Internal', 'Primary', 'Features', 'Video', 'Secondary', 'Alert types', 'Loudspeaker', '3.5mm jack', 'WLAN', 'Bluetooth', 'GPS', 'Infrared port', 'Radio', 'USB', 'Sensors', 'Messaging', 'Browser', 'Java', 'Stand-by', 'Talk time', 'Colors']
 r1 = [['\r\n', 'Network', '\r\n', 'Technology', '\r\n', 'GSM / HSPA / LTE', '\r\n', '  \r\n', '  \r\n'], ['\r\n', '2G bands', '\r\n', 'GSM 850 / 900 / 1800 / 1900 ', '\r\n', '  \r\n', '  \r\n\r\n'], ['\r\n', u'\xa0', '\r\n', 'GSM 850 / 1900 - XT1644 (USA)', '\r\n', '  \r\n', '  \r\n'], ['\r\n', '3G Network', '\r\n', 'HSDPA 850 / 900 / 1700(AWS) / 1900 / 2100 - XT1644, XT1644 (USA), XT1644 (India)', '\r\n', '\r\n', '\r\n'], ['\r\n', '4G Network', '\r\n', 'LTE band 1(2100), 3(1800), 7(2600), 8(900), 20(800) - XT1644', '\r\n', '\r\n', '\r\n'], ['\r\n', u'\xa0', '\r\n', 'LTE band 1(2100), 2(1900), 3(1800), 4(1700/2100), 5(850), 7(2600), 8(900), 12(700), 13(700), 25(1900), 26(850), 41(2500) - XT1644 (USA)', '\r\n', '\r\n', '\r\n'], ['\r\n', u'\xa0', '\r\n', 'LTE band 1(2100), 3(1800), 5(850), 8(900), 40(2300) - XT1644 (India)', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Speed', '\r\n', 'HSPA 42.2/5.76 Mbps, LTE Cat4 150/50 Mbps', '\r\n', '\r\n', '\r\n'], ['\r\n', 'GPRS', '\r\n', 'Yes', '\r\n', '\r\n', '\r\n'], ['\r\n', 'EDGE', '\r\n', 'Yes', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Launch', '\r\n', 'Announced', '\r\n', '2016, May', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Status', '\r\n', 'Available. Released 2016, May', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Body', '\r\n', 'Dimensions', '\r\n', '153 x 76.6 x 9.8 mm (6.02 x 3.02 x 0.39 in)', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Weight', '\r\n', '155 g (5.47 oz)', '\r\n', '\r\n', '\r\n'], ['\r\n', 'SIM', '\r\n', 'Micro-SIM', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Display', '\r\n', 'Type', '\r\n', 'IPS LCD capacitive touchscreen, 16M colors', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Size', '\r\n', '5.5 inches (~71.2% screen-to-body ratio)', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Resolution', '\r\n', '1080 x 1920 pixels (~401 ppi pixel density)', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Multitouch', ' ', '\r\n', 'Yes', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Protection', ' ', '\r\n', 'Corning Gorilla Glass 3', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Platform', '\r\n', 'OS', '\r\n', 'Android OS, v6.0.1 (Marshmallow)', '\r\n', '\r\n', '\r\n'], ['Chipset', '\r\n', 'Qualcomm MSM8952 Snapdragon 617', '\r\n', '\r\n', '\r\n'], ['CPU', '\r\n', 'Quad-core 1.5 GHz Cortex-A53 & quad-core 1.2 GHz Cortex-A53', '\r\n', '\r\n', '\r\n'], ['GPU', '\r\n', 'Adreno 405', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Memory', '\r\n', 'Card slot', '\r\n', 'microSD, up to 128 GB (dedicated slot)', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Internal', '\r\n', '16 GB, 2 GB RAM or 32 GB, 3 GB RAM or 64 GB, 4 GB RAM', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Camera', '\r\n', 'Primary', '\r\n', '16 MP, f/2.0, phase detection & laser autofocus, dual-LED (dual tone) flash', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Features', '\r\n', 'Geo-tagging, touch focus, face detection, panorama, auto-HDR', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Video', '\r\n', '1080p@30fps, HDR', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Secondary', '\r\n', '5 MP, f/2.2, auto-HDR', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Sound', '\r\n', 'Alert types', '\r\n', 'Vibration; MP3, WAV ringtones', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Loudspeaker', ' ', '\r\n', 'Yes', '\r\n', '\r\n', '\r\n'], ['\r\n', '3.5mm jack', ' ', '\r\n', 'Yes', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Comms', '\r\n\r\n', 'WLAN', '\r\n', 'Wi-Fi 802.11 a/b/g/n, Wi-Fi Direct, hotspot', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Bluetooth', '\r\n', 'v4.1, A2DP, LE', '\r\n', '\r\n', '\r\n'], ['\r\n', 'GPS', '\r\n', 'Yes, with A-GPS, GLONASS, BDS', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Infrared port', '\r\n', 'No', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Radio', '\r\n', 'FM radio', '\r\n', '\r\n', '\r\n'], ['\r\n', 'USB', '\r\n', 'microUSB v2.0, USB Host', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Features', '\r\n\r\n', 'Sensors', '\r\n', 'Fingerprint, accelerometer, gyro, proximity', '\r\n', '\r\n', '\r\n'], ['\r\n\t\r\n', 'Messaging', '\r\n', 'SMS(threaded view), MMS, Email, Push Email, IM', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Browser', '\r\n', 'HTML5', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Java', '\r\n', 'No', '\r\n', '\r\n', '\r\n'], [u'\xa0', '- Fast battery charging', '\r\n- Active noise cancellation with dedicated mic', '\r\n- MP3/AAC+/WAV/Flac player', '\r\n- MP4/H.264 player', '\r\n- Photo/video editor', '\r\n- Document viewer', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Battery', '\r\n', u'\xa0', '\r\n', 'Non-removable Li-Ion 3000 mAh battery', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Stand-by', '\r\n', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Talk time', '\r\n', '\r\n', '\r\n', '\r\n'], ['\r\n', 'Misc', '\r\n'], ['\r\n', 'Colors', '\r\n', 'Black, White', '\r\n', '\r\n', '\r\n']]
@@ -10,8 +13,8 @@ storage_and_ram_regex = re.compile(ur'\s(\d{1,3})\sgb,\s(\d{1})\sgb')
 camera_regex = re.compile(ur'\d+\smp')
 battery_regex = re.compile(ur'\d+\smah')
 
+
 def parse_feature(body):
-    row = []
     specs = ['batter', 'camera', 'ram', 'storage']
     mobile_data = {}
     for i in range(len(body)):
@@ -25,22 +28,22 @@ def parse_feature(body):
             print ""
             if 'battery' in clear_val:
                 # print clear_val
-                search = re.search(battery_regex,clear_val)
+                search = re.search(battery_regex, clear_val)
                 if search:
                     # print "battery => ",search.group(0)
                     mobile_data['battery'] = search.group(0)
 
             if 'camera' in clear_val:
-            # UPDATE HERE WITH BATTERY LOGIC
+                # UPDATE HERE WITH BATTERY LOGIC
                 # print clear_val
-                search = re.search(camera_regex,clear_val)
+                search = re.search(camera_regex, clear_val)
                 if search:
                     mobile_data['camera'] = search.group(0)
                 # print "camera => ",re.search(camera_regex,clear_val).group(0)
 
             if 'ram' in clear_val:
                 print clear_val
-                search = re.findall(storage_and_ram_regex,clear_val)
+                search = re.findall(storage_and_ram_regex, clear_val)
                 if search:
                     temp_ram = []
                     temp_storeage = []
@@ -51,12 +54,12 @@ def parse_feature(body):
                     mobile_data['storage'] = temp_storeage
     return mobile_data
 
+
 def split_product(mobile_data):
     mobile_list = []
-    if len(mobile_data.get('ram',0)) and len(mobile_data['storage']):
-        index = 0
+    if len(mobile_data.get('ram', 0)) and len(mobile_data['storage']):
         for m in range(len(mobile_data['ram'])):
-            temp_mobile_data ={}
+            temp_mobile_data = {}
             temp_mobile_data = mobile_data.copy()
             temp_mobile_data['ram'] = mobile_data['ram'][m]
             temp_mobile_data['storage'] = mobile_data['storage'][m]

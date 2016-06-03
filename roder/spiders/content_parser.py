@@ -1,7 +1,5 @@
 import re
-import json
 from lxml import html
-from bs4 import BeautifulSoup
 
 p = re.compile(ur'\s*\r\n|\r|\n')
 storage_and_ram_regex = re.compile(ur'(\d{1,3})\sgb,\s(\d{1})\sgb')
@@ -10,6 +8,8 @@ battery_regex = re.compile(ur'\d+\smah')
 
 
 def parse_feature(body):
+    '''Parse the responce'''
+    # list of allowed features which needs to be stored
     specs = ['batter', 'camera', 'ram', 'storage']
     mobile_data = {}
     for i in range(len(body)):
@@ -22,22 +22,22 @@ def parse_feature(body):
             # print clear_val
             if 'battery' in clear_val:
                 # print clear_val
-                search = re.search(battery_regex,clear_val)
+                search = re.search(battery_regex, clear_val)
                 if search:
                     # print "battery => ",search.group(0)
                     mobile_data['battery'] = search.group(0)
 
             if 'camera' in clear_val:
-            # UPDATE HERE WITH BATTERY LOGIC
+                # UPDATE HERE WITH BATTERY LOGIC
                 # print clear_val
-                search = re.search(camera_regex,clear_val)
+                search = re.search(camera_regex, clear_val)
                 if search:
                     mobile_data['camera'] = search.group(0)
                 # print "camera => ",re.search(camera_regex,clear_val).group(0)
 
             if 'ram' in clear_val:
                 # print clear_val
-                search = re.findall(storage_and_ram_regex,clear_val)
+                search = re.findall(storage_and_ram_regex, clear_val)
                 if search:
                     temp_ram = []
                     temp_storeage = []
@@ -52,9 +52,8 @@ def parse_feature(body):
 def split_product(mobile_name, mobile_image, url, mobile_data):
     mobile_list = []
     if len(mobile_data['ram']) and len(mobile_data['storage']):
-        index = 0
         for m in range(len(mobile_data['ram'])):
-            temp_mobile_data ={}
+            temp_mobile_data = {}
             temp_mobile_data = mobile_data.copy()
             temp_mobile_data['name'] = mobile_name[0]
             temp_mobile_data['url'] = url

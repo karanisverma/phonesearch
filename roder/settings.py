@@ -13,7 +13,7 @@ BOT_NAME = 'roder'
 
 SPIDER_MODULES = ['roder.spiders']
 NEWSPIDER_MODULE = 'roder.spiders'
-
+LOG_LEVEL = 'INFO'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'roder (+http://www.yourdomain.com)'
@@ -24,10 +24,10 @@ ROBOTSTXT_OBEY = False
 # HTTP_ENABLED=False
 # HTTP_PROXY="http://49.207.64.65:8080"
 
-DOWNLOADER_MIDDLEWARES = {
-'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
-'roder.middlewares.ProxyMiddleware': 100,
-}
+# DOWNLOADER_MIDDLEWARES = {
+# 'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
+# 'roder.middlewares.ProxyMiddleware': 100,
+# }
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 
